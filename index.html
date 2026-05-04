@@ -3,8 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Countdown Idul Adha</title>
+
 <style>
-   body {
+body {
     margin: 0;
     height: 100vh;
     display: flex;
@@ -13,63 +14,90 @@
     font-family: 'Segoe UI', sans-serif;
     color: white;
     text-align: center;
+    overflow: hidden;
 
     background: 
         radial-gradient(circle at top, rgba(255,255,255,0.1), transparent),
         linear-gradient(135deg, #0f2027, #203a43, #2c5364);
 }
 
-    .container {
-        backdrop-filter: blur(10px);
-        background: rgba(255,255,255,0.1);
-        padding: 40px;
-        border-radius: 20px;
-        box-shadow: 0 0 40px rgba(0,0,0,0.5);
-    }
+/* Pattern halus */
+body::before {
+    content: "";
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background-image: radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1px);
+    background-size: 40px 40px;
+    opacity: 0.3;
+}
 
-    h1 {
-        font-size: 2.5em;
-        margin-bottom: 10px;
-        letter-spacing: 2px;
-    }
+/* Container utama */
+.container {
+    backdrop-filter: blur(15px);
+    background: rgba(255,255,255,0.08);
+    padding: 50px;
+    border-radius: 25px;
+    box-shadow: 0 0 50px rgba(0,0,0,0.6);
+    border: 1px solid rgba(255,255,255,0.2);
+}
 
-    .arabic {
-        font-size: 1.5em;
-        margin-bottom: 20px;
-        opacity: 0.8;
-    }
+/* Judul */
+h1 {
+    font-size: 2.8em;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+}
 
-    .countdown {
-        display: flex;
-        gap: 20px;
-        justify-content: center;
-        font-size: 1.5em;
-    }
+/* Arab */
+.arabic {
+    font-size: 1.5em;
+    margin-bottom: 25px;
+    opacity: 0.8;
+}
 
-    .box {
-        background: rgba(255,255,255,0.15);
-        padding: 20px;
-        border-radius: 15px;
-        min-width: 80px;
-    }
+/* Countdown layout */
+.countdown {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
 
-    .number {
-        font-size: 2em;
-        font-weight: bold;
-    }
+/* Box angka */
+.box {
+    background: rgba(255,255,255,0.12);
+    padding: 20px;
+    border-radius: 15px;
+    min-width: 90px;
+    transition: 0.3s;
+}
 
-    .label {
-        font-size: 0.8em;
-        opacity: 0.7;
-    }
+.box:hover {
+    transform: scale(1.05);
+    background: rgba(255,255,255,0.2);
+}
 
-    footer {
-        margin-top: 20px;
-        font-size: 0.8em;
-        opacity: 0.6;
-    }
+/* Angka */
+.number {
+    font-size: 2.2em;
+    font-weight: bold;
+}
+
+/* Label */
+.label {
+    font-size: 0.8em;
+    opacity: 0.7;
+}
+
+/* Footer */
+footer {
+    margin-top: 20px;
+    font-size: 0.85em;
+    opacity: 0.7;
+}
 </style>
 </head>
+
 <body>
 
 <div class="container">
@@ -99,30 +127,30 @@
 </div>
 
 <script>
-    // SET TANGGAL IDUL ADHA (bisa kamu ubah nanti)
-    const targetDate = new Date("May 27, 2026 00:00:00").getTime();
+// Tanggal Idul Adha (bisa kamu ubah nanti)
+const targetDate = new Date("May 27, 2026 00:00:00").getTime();
 
-    function updateCountdown() {
-        const now = new Date().getTime();
-        const distance = targetDate - now;
+function updateCountdown() {
+    const now = new Date().getTime();
+    const distance = targetDate - now;
 
-        if (distance < 0) {
-            document.body.innerHTML = "<h1>Selamat Idul Adha 🐐✨</h1>";
-            return;
-        }
-
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
-        const minutes = Math.floor((distance / (1000 * 60)) % 60);
-        const seconds = Math.floor((distance / 1000) % 60);
-
-        document.getElementById("days").innerText = days;
-        document.getElementById("hours").innerText = hours;
-        document.getElementById("minutes").innerText = minutes;
-        document.getElementById("seconds").innerText = seconds;
+    if (distance < 0) {
+        document.body.innerHTML = "<h1>Selamat Idul Adha 🐐✨</h1>";
+        return;
     }
 
-    setInterval(updateCountdown, 1000);
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((distance / (1000 * 60)) % 60);
+    const seconds = Math.floor((distance / 1000) % 60);
+
+    document.getElementById("days").innerText = days;
+    document.getElementById("hours").innerText = hours;
+    document.getElementById("minutes").innerText = minutes;
+    document.getElementById("seconds").innerText = seconds;
+}
+
+setInterval(updateCountdown, 1000);
 </script>
 
 </body>
