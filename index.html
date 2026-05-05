@@ -20,6 +20,16 @@ body {
     background: url('gg.jpg') no-repeat center/cover;
 }
 
+/* overlay gelap */
+body::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,var(--overlay, 0.6));
+    z-index: 0;
+    transition: 0.5s;
+}
 
 .container {
     position: relative;
@@ -130,6 +140,23 @@ footer {
 <script>
 const targetDate = new Date("May 27, 2026 00:00:00").getTime();
 
+function updateOverlayByTime() {
+    const hour = new Date().getHours();
+    let opacity;
+    if (hour >= 23 || hour < 6) {
+        opacity = 0.7; // malam (gelap)
+    } else {
+        opacity = 0; // siang (terang)
+    }
+    document.body.style.setProperty('--overlay', opacity);
+}
+
+// jalan pertama kali
+updateOverlayByTime();
+    
+// update tiap menit
+setInterval(updateOverlayByTime, 60000);
+    
 function updateCountdown() {
     const now = new Date().getTime();
     const distance = targetDate - now;
