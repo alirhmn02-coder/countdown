@@ -2,11 +2,11 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>Countdown Idul Adha</title>
+<title>Idul Adha Countdown</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
-    
+
 <style>
 body {
     margin: 0;
@@ -17,39 +17,44 @@ body {
     font-family: 'Playfair Display', serif;
     color: white;
     text-align: center;
-    background: url('gg.jpg') no-repeat center center/cover;
+    background: url('gg.jpg') no-repeat center/cover;
 }
 
-/* Overlay biar gelap elegan */
+/* overlay gelap */
 body::before {
     content: "";
     position: absolute;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.6);
+    background: rgba(0,0,0,0.65);
     z-index: 0;
 }
 
 .container {
     position: relative;
     z-index: 1;
-
     backdrop-filter: blur(10px);
-    background: rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.08);
     padding: 40px;
     border-radius: 20px;
     box-shadow: 0 0 40px rgba(0,0,0,0.7);
+    animation: fadeIn 1.5s ease;
 }
 
 h1 {
+    font-size: 3em;
+    letter-spacing: 3px;
+    color: AntiqueWhite;
+}
+
+h2 {
     font-size: 2.5em;
-    margin-bottom: 10px;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
+    color: BurlyWood;
 }
 
 .arabic {
     font-family: 'Amiri', serif;
-    font-size: 1.5em;
     font-size: 1.5em;
     margin-bottom: 20px;
     opacity: 0.9;
@@ -59,7 +64,6 @@ h1 {
     display: flex;
     gap: 20px;
     justify-content: center;
-    font-size: 1.5em;
 }
 
 .box {
@@ -67,6 +71,7 @@ h1 {
     padding: 20px;
     border-radius: 15px;
     min-width: 80px;
+    box-shadow: 0 0 15px rgba(255,255,255,0.2);
 }
 
 .number {
@@ -81,40 +86,54 @@ h1 {
 
 footer {
     margin-top: 20px;
-    font-size: 1em;
-    opacity: 0.7;
+    font-size: 1.2em;
+    opacity: 0.8;
+}
+
+.goat-icon {
+    width: 40px;
+    vertical-align: middle;
+    margin-left: 10px;
+}
+
+/* animasi */
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(20px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+/* efek sparkle sederhana */
+.sparkle {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: gold;
+    border-radius: 50%;
+    animation: sparkle 2s infinite;
+}
+
+@keyframes sparkle {
+    0% {opacity: 0; transform: scale(0);}
+    50% {opacity: 1; transform: scale(1.5);}
+    100% {opacity: 0; transform: scale(0);}
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
-    <h1>
-         Idul Adha 
-    </h1>
+<div class="container" id="card">
+    <h1> Idul Adha </h1>
     <div class="arabic">عيد الأضحى</div>
 
     <div class="countdown">
-        <div class="box">
-            <div id="days" class="number">0</div>
-            <div class="label">Hari</div>
-        </div>
-        <div class="box">
-            <div id="hours" class="number">0</div>
-            <div class="label">Jam</div>
-        </div>
-        <div class="box">
-            <div id="minutes" class="number">0</div>
-            <div class="label">Menit</div>
-        </div>
-        <div class="box">
-            <div id="seconds" class="number">0</div>
-            <div class="label">Detik</div>
-        </div>
+        <div class="box"><div id="days" class="number">0</div><div class="label">Hari</div></div>
+        <div class="box"><div id="hours" class="number">0</div><div class="label">Jam</div></div>
+        <div class="box"><div id="minutes" class="number">0</div><div class="label">Menit</div></div>
+        <div class="box"><div id="seconds" class="number">0</div><div class="label">Detik</div></div>
     </div>
 
-    <footer>✨Menuju Hari Raya✨</footer>
+    <footer>🌙 ✨ Menuju Hari Raya ✨ 🌙</footer>
 </div>
 
 <script>
@@ -125,19 +144,44 @@ function updateCountdown() {
     const distance = targetDate - now;
 
     if (distance < 0) {
-        document.body.innerHTML = "<h1>✨Selamat Idul Adha✨</h1>";
+        showGreeting();
         return;
     }
 
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
-    const minutes = Math.floor((distance / (1000 * 60)) % 60);
-    const seconds = Math.floor((distance / 1000) % 60);
+    document.getElementById("days").innerText = Math.floor(distance / (1000*60*60*24));
+    document.getElementById("hours").innerText = Math.floor((distance / (1000*60*60)) % 24);
+    document.getElementById("minutes").innerText = Math.floor((distance / (1000*60)) % 60);
+    document.getElementById("seconds").innerText = Math.floor((distance / 1000) % 60);
+}
 
-    document.getElementById("days").innerText = days;
-    document.getElementById("hours").innerText = hours;
-    document.getElementById("minutes").innerText = minutes;
-    document.getElementById("seconds").innerText = seconds;
+function showGreeting() {
+    const card = document.getElementById("card");
+
+    card.innerHTML = `
+    <h1>✨ Bayramınız Mübarek Olsun ✨</h1>
+    
+    <h2 style="margin-top:10px; font-weight:400;">
+        Selamat Hari Raya Idul Adha
+    </h2>
+
+    <div class="arabic" style="margin-top:15px; font-size:2.5em;">
+        عيد مبارك
+    </div>
+
+    <div class="arabic" style="font-size:2em; margin-top:20px;">
+         ✨١٠ ذوالحجة ١٤٤٧ هـ✨
+    </div>
+`;
+
+    // tambah sparkle random
+    for (let i = 0; i < 20; i++) {
+        const s = document.createElement("div");
+        s.className = "sparkle";
+        s.style.top = Math.random()*100 + "%";
+        s.style.left = Math.random()*100 + "%";
+        s.style.animationDelay = Math.random()*2 + "s";
+        document.body.appendChild(s);
+    }
 }
 
 setInterval(updateCountdown, 1000);
