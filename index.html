@@ -144,11 +144,11 @@ function updateOverlayByTime() {
     const hour = new Date().getHours();
     let opacity;
     if (hour >= 23 || hour < 6) {
-        opacity = 0.7; // malam (gelap)
-        document.body.style.backgroundImage = "url('bg-night.jpg')";
+        opacity = 0.7;
+        document.body.style.backgroundImage = "url('gg-night.jpg')";
     } else {
-        opacity = 0; // siang (terang)
-        document.body.style.backgroundImage = "url('bg.jpg')";
+        opacity = 0.2;
+        document.body.style.backgroundImage = "url('gg.jpg')";
     }
     document.body.style.setProperty('--overlay', opacity);
 }
