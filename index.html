@@ -143,7 +143,7 @@ const targetDate = new Date("May 27, 2026 00:00:00").getTime();
 function updateOverlayByTime() {
     const hour = new Date().getHours();
     let opacity;
-    if (hour >= 23 || hour < 6) {
+    if (hour >= 18 || hour < 6) {
         opacity = 0.2;
         document.body.style.backgroundImage = "url('gg-night.jpg')";
     } else {
