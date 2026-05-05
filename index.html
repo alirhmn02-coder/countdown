@@ -150,6 +150,7 @@ function updateOverlayByTime() {
         opacity = 0.2;
         document.body.style.backgroundImage = "url('gg.jpg')";
     }
+    console.log("Jam:", hour, "| Overlay:", opacity);
     document.body.style.setProperty('--overlay', opacity);
 }
 
